@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Alya Putri — Portofolio PKL</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5.0.0/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.0/index.css">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#faf8ff;
+    --bg-2:#f5f0ff;
+    --card:#ffffff;
+    --border:rgba(160,140,200,0.15);
+    --text:#2d2a3e;
+    --text-soft:#5a5470;
+    --muted:#8b85a0;
+    --primary:#a78bfa;
+    --primary-soft:#ede9fe;
+    --rose:#f9a8d4;
+    --rose-soft:#fce7f3;
+    --peach:#fdba74;
+    --peach-soft:#ffedd5;
+    --mint:#86efac;
+    --mint-soft:#dcfce7;
+    --grad-main:linear-gradient(135deg,#c4b5fd 0%,#f9a8d4 50%,#fdba74 100%);
+    --grad-soft:linear-gradient(135deg,#ede9fe 0%,#fce7f3 50%,#ffedd5 100%);
+    --grad-card:linear-gradient(135deg,#f5f0ff 0%,#fdf2f8 100%);
+    --shadow-sm:0 2px 10px rgba(160,140,200,0.08);
+    --shadow:0 8px 30px rgba(160,140,200,0.1);
+    --shadow-lg:0 20px 50px rgba(160,140,200,0.15);
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    line-height:1.7;
+    font-size:15px;
+  }
+  h1,h2,h3,h4{font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+  a{color:inherit;text-decoration:none}
+
+  /* Soft gradient background */
+  .bg-mesh{
+    position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:var(--bg);
+  }
+  .bg-mesh::before{
+    content:'';position:absolute;
+    top:-10%;left:-10%;width:60%;height:60%;
+    background:radial-gradient(circle, rgba(196,181,253,0.35) 0%, transparent 60%);
+    filter:blur(80px);
+    animation:float1 20s ease-in-out infinite;
+  }
+  .bg-mesh::after{
+    content:'';position:absolute;
+    bottom:-10%;right:-10%;width:60%;height:60%;
+    background:radial-gradient(circle, rgba(249,168,212,0.3) 0%, transparent 60%);
+    filter:blur(80px);
+    animation:float2 25s ease-in-out infinite;
+  }
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,30px)}}
+  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-30px)}}
+
+  /* Nav */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:16px 40px;
+    display:flex;justify-content:space-between;align-items:center;
+    backdrop-filter:blur(20px);
+    background:rgba(250,248,255,0.7);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:700;font-size:18px;
+    display:flex;align-items:center;gap:10px;
+    color:var(--text);
+  }
+  .logo-mark{
+    width:34px;height:34px;border-radius:10px;
+    background:var(--grad-main);
+    color:#fff;
+    display:grid;place-items:center;
+    font-weight:700;font-size:14px;
+    box-shadow:var(--shadow-sm);
+  }
+  .nav-links{display:flex;gap:28px;align-items:center}
+  .nav-links a{
+    font-size:14px;color:var(--text-soft);
+    transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--primary)}
+  .nav-cta{
+    padding:9px 20px;border-radius:999px;
+    background:var(--grad-main);color:#fff;
+    font-weight:500;font-size:13px;
+    transition:all .25s;
+    box-shadow:0 4px 15px rgba(167,139,250,0.3);
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(167,139,250,0.4)}
+  .menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer}
+
+  .container{max-width:1120px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+  section{padding:100px 0;position:relative}
+
+  /* Hero */
+  .hero{min-height:100vh;display:flex;align-items:center;padding-top:100px}
+  .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center;width:100%}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 16px;border-radius:999px;
+    background:var(--grad-soft);
+    color:var(--text-soft);
+    font-size:13px;
+    margin-bottom:24px;font-weight:500;
+    border:1px solid var(--border);
+  }
+  .badge .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--grad-main);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+  .hero h1{
+    font-size:clamp(38px,5vw,62px);
+    line-height:1.1;margin-bottom:20px;
+    font-weight:600;
+  }
+  .hero h1 .grad{
+    background:var(--grad-main);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-style:italic;
+  }
+  .hero p.lead{
+    font-size:16px;color:var(--text-soft);
+    max-width:520px;margin-bottom:18px;
+  }
+  .hero-info{
+    display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;
+    font-size:13px;color:var(--text-soft);
+  }
+  .hero-info span{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:7px 14px;border-radius:10px;
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow-sm);
+  }
+  .hero-info svg{width:13px;height:13px;color:var(--primary)}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    padding:13px 26px;border-radius:14px;
+    font-weight:500;font-size:14px;
+    display:inline-flex;align-items:center;gap:9px;
+    transition:all .25s;cursor:pointer;border:none;
+  }
+  .btn-primary{
+    background:var(--grad-main);color:#fff;
+    box-shadow:0 8px 25px rgba(167,139,250,0.3);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(167,139,250,0.4)}
+  .btn-ghost{
+    background:var(--card);border:1px solid var(--border);color:var(--text);
+    box-shadow:var(--shadow-sm);
+  }
+  .btn-ghost:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px)}
+
+  /* Avatar */
+  .avatar-wrap{
+    position:relative;aspect-ratio:1;max-width:400px;margin-left:auto;
+  }
+  .avatar-glow{
+    position:absolute;inset:-15%;
+    background:var(--grad-main);
+    filter:blur(60px);opacity:0.35;
+    border-radius:50%;
+    animation:float3 6s ease-in-out infinite;
+  }
+  @keyframes float3{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-15px) scale(1.03)}}
+  .avatar{
+    position:relative;width:100%;height:100%;
+    border-radius:32px;
+    background:var(--grad-soft);
+    border:1px solid var(--border);
+    overflow:hidden;
+    display:grid;place-items:center;
+    box-shadow:var(--shadow-lg);
+  }
+  .avatar svg{width:80%;height:80%}
+  .floating-card{
+    position:absolute;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:12px 16px;
+    display:flex;align-items:center;gap:10px;
+    font-size:13px;
+    box-shadow:var(--shadow);
+    animation:float3 5s ease-in-out infinite;
+  }
+  .fc-1{top:8%;left:-12%;animation-delay:0s}
+  .fc-2{bottom:12%;right:-12%;animation-delay:1.5s}
+  .fc-icon{
+    width:34px;height:34px;border-radius:10px;
+    display:grid;place-items:center;font-size:16px;
+  }
+  .fc-1 .fc-icon{background:var(--primary-soft);color:var(--primary)}
+  .fc-2 .fc-icon{background:var(--rose-soft);color:#ec4899}
+  .fc-label{color:var(--muted);font-size:11px}
+  .fc-value{font-weight:600;font-size:13px;color:var(--text)}
+
+  /* Section header */
+  .section-head{margin-bottom:50px;max-width:600px}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .section-tag{
+    font-size:12px;
+    background:var(--grad-main);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-transform:uppercase;letter-spacing:0.18em;
+    margin-bottom:14px;font-weight:700;
+    display:inline-block;
+  }
+  .section-head h2{font-size:clamp(28px,3.5vw,42px);line-height:1.2;margin-bottom:14px;font-weight:600}
+  .section-head p{color:var(--text-soft);font-size:15px}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:50px;align-items:start}
+  .about-img{
+    aspect-ratio:4/5;border-radius:28px;
+    background:var(--grad-soft);
+    border:1px solid var(--border);
+    position:relative;overflow:hidden;
+    display:grid;place-items:center;
+    box-shadow:var(--shadow);
+  }
+  .about-img svg{width:70%;height:70%}
+  .about-text h3{font-size:22px;margin-bottom:16px;font-weight:600}
+  .about-text p{color:var(--text-soft);margin-bottom:12px;font-size:15px}
+  .about-list{list-style:none;margin-top:20px;display:grid;gap:10px}
+  .about-list li{
+    display:flex;align-items:center;gap:12px;
+    padding:13px 18px;border-radius:14px;
+    background:var(--grad-card);
+    border:1px solid var(--border);
+    font-size:14px;color:var(--text-soft);
+    transition:all .2s;
+  }
+  .about-list li:hover{transform:translateX(4px);border-color:var(--primary)}
+  .about-list li::before{
+    content:'';width:7px;height:7px;border-radius:50%;
+    background:var(--grad-main);flex-shrink:0;
+  }
+
+  /* Education */
+  .edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .edu-card{
+    padding:26px;border-radius:20px;
+    background:var(--card);
+    border:1px solid var(--border);
+    transition:all .3s;
+    box-shadow:var(--shadow-sm);
+    position:relative;overflow:hidden;
+  }
+  .edu-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:var(--grad-main);
+    transform:scaleX(0);transform-origin:left;
+    transition:transform .4s;
+  }
+  .edu-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .edu-card:hover::before{transform:scaleX(1)}
+  .edu-year{
+    display:inline-block;padding:5px 13px;border-radius:999px;
+    background:var(--grad-soft);color:var(--text-soft);
+    font-size:11px;font-weight:600;margin-bottom:14px;
+    letter-spacing:0.05em;
+  }
+  .edu-card h3{font-size:17px;margin-bottom:6px;font-weight:600}
+  .edu-card .school{
+    font-size:13px;font-weight:500;margin-bottom:10px;
+    background:var(--grad-main);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .edu-card p{color:var(--text-soft);font-size:13px}
+
+  /* Skills */
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .skill-card{
+    padding:24px;border-radius:20px;
+    background:var(--card);
+    border:1px solid var(--border);
+    transition:all .3s;
+    box-shadow:var(--shadow-sm);
+    position:relative;overflow:hidden;
+  }
+  .skill-card::after{
+    content:'';position:absolute;inset:0;
+    background:var(--grad-soft);
+    opacity:0;transition:opacity .3s;
+    z-index:0;
+  }
+  .skill-card > *{position:relative;z-index:1}
+  .skill-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--primary)}
+  .skill-card:hover::after{opacity:1}
+  .skill-icon{
+    width:46px;height:46px;border-radius:13px;
+    display:grid;place-items:center;
+    margin-bottom:16px;font-size:20px;
+  }
+  .skill-card:nth-child(1) .skill-icon{background:var(--primary-soft);color:var(--primary)}
+  .skill-card:nth-child(2) .skill-icon{background:var(--rose-soft);color:#ec4899}
+  .skill-card:nth-child(3) .skill-icon{background:var(--peach-soft);color:#f97316}
+  .skill-card:nth-child(4) .skill-icon{background:var(--mint-soft);color:#16a34a}
+  .skill-card:nth-child(5) .skill-icon{background:#e0e7ff;color:#6366f1}
+  .skill-card:nth-child(6) .skill-icon{background:#fef3c7;color:#d97706}
+  .skill-card h3{font-size:16px;margin-bottom:6px;font-weight:600}
+  .skill-card p{color:var(--text-soft);font-size:13px;margin-bottom:14px}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .skill-tags span{
+    font-size:11px;padding:4px 11px;border-radius:999px;
+    background:var(--grad-card);color:var(--text-soft);
+    border:1px solid var(--border);
+  }
+
+  /* Projects */
+  .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .project{
+    border-radius:22px;overflow:hidden;
+    background:var(--card);border:1px solid var(--border);
+    transition:all .3s;cursor:pointer;
+    box-shadow:var(--shadow-sm);
+  }
+  .project:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+  .project-img{
+    aspect-ratio:16/10;position:relative;overflow:hidden;
+    display:grid;place-items:center;
+  }
+  .project:nth-child(1) .project-img{background:var(--grad-soft)}
+  .project:nth-child(2) .project-img{background:linear-gradient(135deg,#fce7f3 0%,#ffedd5 100%)}
+  .project:nth-child(3) .project-img{background:linear-gradient(135deg,#ffedd5 0%,#fef3c7 100%)}
+  .project:nth-child(4) .project-img{background:linear-gradient(135deg,#e0e7ff 0%,#ede9fe 100%)}
+  .project-img svg{width:70%;height:70%;opacity:0.95}
+  .project-body{padding:22px}
+  .project-meta{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:10px;
+  }
+  .project-cat{
+    font-size:11px;
+    background:var(--grad-main);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-transform:uppercase;letter-spacing:0.1em;font-weight:700;
+    padding:3px 12px;border-radius:999px;
+    background-clip:text;
+    border:1px solid var(--border);
+    background-color:var(--grad-card);
+  }
+  .project-year{font-size:12px;color:var(--muted)}
+  .project h3{font-size:18px;margin-bottom:6px;font-weight:600}
+  .project p{color:var(--text-soft);font-size:13px;margin-bottom:14px}
+  .project-tech{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+  .project-tech span{
+    font-size:11px;padding:4px 10px;border-radius:8px;
+    background:var(--grad-card);color:var(--text-soft);
+    border:1px solid var(--border);
+  }
+  .project-link{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;font-weight:600;color:var(--text);
+    transition:all .2s;
+  }
+  .project:hover .project-link{gap:12px}
+  .project:hover .project-link svg{
+    background:var(--grad-main);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  /* Contact */
+  .contact{
+    text-align:center;
+    padding:80px 40px;
+    border-radius:32px;
+    background:var(--grad-soft);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow-lg);
+    position:relative;overflow:hidden;
+  }
+  .contact::before{
+    content:'';position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(196,181,253,0.3), transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(249,168,212,0.25), transparent 50%);
+  }
+  .contact > *{position:relative;z-index:1}
+  .contact h2{font-size:clamp(28px,4vw,46px);margin-bottom:16px;font-weight:600}
+  .contact h2 .grad{
+    background:var(--grad-main);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .contact p{color:var(--text-soft);font-size:15px;max-width:520px;margin:0 auto 30px}
+  .contact-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .contact-info{
+    display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+    margin-top:32px;font-size:13px;color:var(--text-soft);
+  }
+  .contact-info a{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 16px;border-radius:12px;
+    background:var(--card);
+    border:1px solid var(--border);
+    transition:all .2s;
+    box-shadow:var(--shadow-sm);
+  }
+  .contact-info a:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--primary)}
+  .contact-info svg{width:15px;height:15px;color:var(--primary)}
+  .socials{display:flex;gap:10px;justify-content:center;margin-top:28px}
+  .social{
+    width:42px;height:42px;border-radius:13px;
+    background:var(--card);
+    border:1px solid var(--border);
+    display:grid;place-items:center;
+    transition:all .25s;
+    color:var(--text-soft);
+    box-shadow:var(--shadow-sm);
+  }
+  .social:hover{
+    background:var(--grad-main);color:#fff;
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(167,139,250,0.3);
+    border-color:transparent;
+  }
+
+  /* Footer */
+  footer{
+    padding:30px 40px;border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:13px;color:var(--muted);
+    flex-wrap:wrap;gap:12px;
+  }
+  footer .heart{
+    background:var(--grad-main);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-weight:600;
+  }
+
+  .reveal{opacity:0;transform:translateY(25px);transition:all .8s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  @media (max-width:900px){
+    nav{padding:14px 20px}
+    .nav-links{display:none}
+    .menu-toggle{display:block}
+    .container{padding:0 20px}
+    section{padding:70px 0}
+    .hero-grid,.about-grid{grid-template-columns:1fr;gap:40px}
+    .avatar-wrap{margin:0 auto;max-width:280px}
+    .edu-grid,.skills-grid,.projects-grid{grid-template-columns:1fr}
+    footer{flex-direction:column;text-align:center}
+    .floating-card{display:none}
+    .contact{padding:60px 25px}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-mesh"></div>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">AP</div>
+    <span>Alya Putri</span>
+  </div>
+  <div class="nav-links">
+    <a href="#tentang">Tentang</a>
+    <a href="#pendidikan">Pendidikan</a>
+    <a href="#keahlian">Keahlian</a>
+    <a href="#project">Project</a>
+    <a href="#kontak" class="nav-cta">Hubungi Saya</a>
+  </div>
+  <button class="menu-toggle" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="badge"><span class="dot"></span> Terbuka untuk PKL 2026</div>
+        <h1>Halo, saya <br><span class="grad">Alya Putri</span> ✨</h1>
+        <p class="lead">Siswa SMK yang sedang belajar menjadi web developer. Sedang mencari tempat PKL untuk belajar, berkembang, dan berkontribusi di dunia industri.</p>
+        <div class="hero-info">
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Bandung, Indonesia
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            SMK Tunas Bangsa · XI RPL
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            PKL: Jan – Mar 2026
+          </span>
+        </div>
+        <div class="hero-actions">
+          <a href="#kontak" class="btn btn-primary">
+            Lamar PKL
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#project" class="btn btn-ghost">Lihat Project</a>
+        </div>
+      </div>
+      <div class="avatar-wrap reveal">
+        <div class="avatar-glow"></div>
+        <div class="avatar">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#c4b5fd"/>
+                <stop offset="50%" stop-color="#f9a8d4"/>
+                <stop offset="100%" stop-color="#fdba74"/>
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="78" r="32" fill="url(#g1)" opacity="0.95"/>
+            <path d="M 45 170 Q 45 118 100 118 Q 155 118 155 170 Z" fill="url(#g1)" opacity="0.9"/>
+            <circle cx="90" cy="75" r="2.5" fill="#2d2a3e"/>
+            <circle cx="110" cy="75" r="2.5" fill="#2d2a3e"/>
+            <path d="M 92 88 Q 100 94 108 88" stroke="#2d2a3e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M 70 58 Q 100 40 130 58" stroke="#2d2a3e" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="floating-card fc-1">
+          <div class="fc-icon">💻</div>
+          <div>
+            <div class="fc-label">Fokus</div>
+            <div class="fc-value">Web Developer</div>
+          </div>
+        </div>
+        <div class="floating-card fc-2">
+          <div class="fc-icon">✨</div>
+          <div>
+            <div class="fc-label">Status</div>
+            <div class="fc-value">Siap Magang</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TENTANG -->
+<section id="tentang">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Tentang Saya</div>
+      <h2>Sedikit cerita tentang saya.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#c4b5fd"/>
+              <stop offset="50%" stop-color="#f9a8d4"/>
+              <stop offset="100%" stop-color="#fdba74"/>
+            </linearGradient>
+          </defs>
+          <circle cx="100" cy="95" r="30" fill="url(#g2)" opacity="0.95"/>
+          <path d="M 50 220 Q 50 150 100 150 Q 150 150 150 220 Z" fill="url(#g2)" opacity="0.9"/>
+          <circle cx="92" cy="92" r="2.5" fill="#2d2a3e"/>
+          <circle cx="108" cy="92" r="2.5" fill="#2d2a3e"/>
+          <path d="M 92 105 Q 100 110 108 105" stroke="#2d2a3e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="about-text reveal">
+        <h3>Siswa yang senang belajar hal baru 🌸</h3>
+        <p>Saya Alya, siswa kelas XI SMK Tunas Bangsa jurusan Rekayasa Perangkat Lunom. Saya mulai tertarik dengan dunia web sejak kelas X dan sejak itu terus belajar secara otodidak dan di sekolah.</p>
+        <p>Saya berharap bisa menjalani PKL di tempat yang mendukung saya untuk belajar, berkembang, dan berkontribusi. Saya tipe orang yang teliti, rapi, dan senang bekerja dalam tim.</p>
+        <ul class="about-list">
+          <li>Aktif di ekstrakurikuler coding dan desain sekolah</li>
+          <li>Juara 3 Lomba Web Design tingkat kota 2025</li>
+          <li>Anggota OSIS divisi Informasi & Komunikasi</li>
+          <li>Rajin mengikuti kursus online di Dicoding & YouTube</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PENDIDIKAN -->
+<section id="pendidikan">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Pendidikan</div>
+      <h2>Perjalanan belajar saya.</h2>
+      <p>Riwayat pendidikan formal dan pelatihan yang telah saya ikuti.</p>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-year">2023 — Sekarang</div>
+        <h3>SMK Tunas Bangsa</h3>
+        <div class="school">Rekayasa Perangkat Lunom · Kelas XI</div>
+        <p>Fokus pada pemrograman web, basis data, dan pengembangan aplikasi. Aktif dalam kegiatan praktikum dan project tim.</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">2020 — 2023</div>
+        <h3>SMP Melati Indah</h3>
+        <div class="school">Lulus dengan predikat sangat baik</div>
+        <p>Mulai mengenal dasar-dasar komputer dan aktif di ekskul TIK. Pernah menjadi ketua panitia acara teknologi sekolah.</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">2025</div>
+        <h3>Dicoding — Belajar Dasar Pemrograman Web</h3>
+        <div class="school">Sertifikat Resmi · 60 Jam Belajar</div>
+        <p>Mempelajari HTML, CSS, dan JavaScript dasar hingga pembuatan website interaktif dan responsif.</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">2025</div>
+        <h3>Progate — HTML, CSS, JavaScript</h3>
+        <div class="school">Sertifikat Online · 3 Kursus</div>
+        <p>Mendalami struktur web modern, styling dengan CSS, dan logika JavaScript untuk membuat website interaktif.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEAHLIAN -->
+<section id="keahlian">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Keahlian</div>
+      <h2>Apa yang bisa saya bantu.</h2>
+      <p>Kombinasi skill teknis dan soft skill yang saya kembangkan selama belajar.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">🌐</div>
+        <h3>Frontend Web</h3>
+        <p>Membuat tampilan website yang rapi, responsif, dan nyaman dilihat.</p>
+        <div class="skill-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Tailwind</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🎨</div>
+        <h3>Desain UI</h3>
+        <p>Merancang mockup dan prototipe aplikasi sebelum dibuat.</p>
+        <div class="skill-tags"><span>Figma</span><span>Canva</span><span>Wireframe</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄️</div>
+        <h3>Basis Data</h3>
+        <p>Mengelola dan merancang database sederhana untuk aplikasi.</p>
+        <div class="skill-tags"><span>MySQL</span><span>phpMyAdmin</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚙️</div>
+        <h3>Backend Dasar</h3>
+        <p>Membuat logika server sederhana untuk aplikasi web.</p>
+        <div class="skill-tags"><span>PHP</span><span>Laravel</span><span>Node.js</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🛠️</div>
+        <h3>Tools</h3>
+        <p>Menggunakan tools modern untuk meningkatkan produktivitas.</p>
+        <div class="skill-tags"><span>Git</span><span>GitHub</span><span>VS Code</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤝</div>
+        <h3>Soft Skill</h3>
+        <p>Kemampuan pendukung untuk bekerja dalam tim profesional.</p>
+        <div class="skill-tags"><span>Kerja Tim</span><span>Disiplin</span><span>Teliti</span><span>Cepat Belajar</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Project</div>
+      <h2>Project yang pernah saya kerjakan.</h2>
+      <p>Beberapa hasil latihan dan tugas sekolah yang saya banggakan.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project reveal">
+        <div class="project-img">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="30" width="320" height="190" rx="12" fill="rgba(255,255,255,0.7)"/>
+            <rect x="60" y="50" width="120" height="12" rx="4" fill="#c4b5fd" opacity="0.8"/>
+            <rect x="60" y="75" width="200" height="6" rx="3" fill="#8b85a0" opacity="0.4"/>
+            <rect x="60" y="100" width="140" height="80" rx="8" fill="url(#pg1)" opacity="0.6"/>
+            <rect x="210" y="100" width="130" height="35" rx="6" fill="#f9a8d4" opacity="0.6"/>
+            <rect x="210" y="145" width="130" height="35" rx="6" fill="#fdba74" opacity="0.5"/>
+            <defs><linearGradient id="pg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="100%" stop-color="#f9a8d4"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-cat">Website Sekolah</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3>Website Profil SMK</h3>
+          <p>Website profil sekolah dengan halaman berita, galeri, dan informasi jurusan. Dibuat sebagai project akhir kelas X.</p>
+          <div class="project-tech"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a href="#" class="project-link">Lihat detail <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-img">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="140" y="20" width="120" height="210" rx="18" fill="rgba(255,255,255,0.7)"/>
+            <rect x="150" y="35" width="100" height="180" rx="10" fill="#f9a8d4" opacity="0.3"/>
+            <rect x="160" y="50" width="80" height="8" rx="3" fill="#2d2a3e" opacity="0.6"/>
+            <rect x="160" y="70" width="80" height="50" rx="6" fill="#f9a8d4" opacity="0.6"/>
+            <rect x="160" y="130" width="38" height="38" rx="6" fill="rgba(255,255,255,0.9)"/>
+            <rect x="202" y="130" width="38" height="38" rx="6" fill="rgba(255,255,255,0.9)"/>
+            <rect x="160" y="175" width="80" height="30" rx="6" fill="#fdba74" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-cat">Aplikasi Sekolah</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3>Absensi QR Code</h3>
+          <p>Aplikasi sederhana untuk absensi siswa menggunakan QR Code. Dibuat bersama tim saat praktikum basis data.</p>
+          <div class="project-tech"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
+          <a href="#" class="project-link">Lihat detail <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-img">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="125" r="80" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="160" cy="100" r="40" fill="#fdba74" opacity="0.6"/>
+            <circle cx="240" cy="150" r="50" fill="#f9a8d4" opacity="0.5"/>
+            <circle cx="200" cy="90" r="25" fill="#c4b5fd" opacity="0.5"/>
+            <rect x="120" y="200" width="160" height="10" rx="4" fill="#2d2a3e" opacity="0.5"/>
+            <rect x="150" y="218" width="100" height="6" rx="3" fill="#8b85a0" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-cat">Lomba</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3>Landing Page UMKM</h3>
+          <p>Desain landing page untuk UMKM lokal sebagai partisipasi lomba Web Design tingkat kota. Alhamdulillah juara 3.</p>
+          <div class="project-tech"><span>HTML</span><span>Tailwind CSS</span><span>Figma</span></div>
+          <a href="#" class="project-link">Lihat detail <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-img">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="40" width="150" height="170" rx="8" fill="rgba(255,255,255,0.7)"/>
+            <rect x="210" y="40" width="150" height="80" rx="8" fill="#c4b5fd" opacity="0.5"/>
+            <rect x="210" y="130" width="150" height="80" rx="8" fill="rgba(255,255,255,0.7)"/>
+            <rect x="55" y="55" width="120" height="100" rx="4" fill="#f9a8d4" opacity="0.5"/>
+            <rect x="55" y="170" width="80" height="8" rx="3" fill="#2d2a3e" opacity="0.5"/>
+            <rect x="55" y="185" width="50" height="5" rx="2" fill="#8b85a0" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-cat">Tugas Sekolah</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3>Kasir Sederhana</h3>
+          <p>Aplikasi kasir mini untuk kantin sekolah dengan fitur input barang, transaksi, dan cetak struk sederhana.</p>
+          <div class="project-tech"><span>JavaScript</span><span>LocalStorage</span><span>CSS</span></div>
+          <a href="#" class="project-link">Lihat detail <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div class="container">
+    <div class="contact reveal">
+      <div class="section-tag">Hubungi Saya</div>
+      <h2>Mari berkolaborasi <span class="grad">🌸</span></h2>
+      <p>Saya sangat terbuka untuk kesempatan PKL di perusahaan Bapak/Ibu. Silakan hubungi saya melalui kontak di bawah ini.</p>
+      <div class="contact-actions">
+        <a href="mailto:alya.putri@email.com" class="btn btn-primary">
+          Kirim Email
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#" class="btn btn-ghost">Download CV</a>
+      </div>
+      <div class="contact-info">
+        <a href="mailto:alya.putri@email.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          alya.putri@email.com
+        </a>
+        <a href="tel:+6281234567890">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +62 812-3456-7890
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Bandung, Indonesia
+        </a>
+      </div>
+      <div class="socials">
+        <a href="#" class="social" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" class="social" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.44v6.3zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <a href="#" class="social" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11 11 0 015.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.5 11.5 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/></svg></a>
+        <a href="#" class="social" aria-label="WhatsApp"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Alya Putri · Siswa SMK Tunas Bangsa</div>
+  <div>Dibuat dengan <span class="heart">♥</span> untuk kesempatan PKL</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const toggle = document.querySelector('.menu-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle?.addEventListener('click',()=>{
+    const open = links.style.display === 'flex';
+    links.style.display = open ? '' : 'flex';
+    links.style.position = 'absolute';
+    links.style.top = '60px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.flexDirection = 'column';
+    links.style.padding = '20px';
+    links.style.background = 'rgba(250,248,255,0.98)';
+    links.style.borderBottom = '1px solid var(--border)';
+  });
+</script>
+
+</body>
+</html>
